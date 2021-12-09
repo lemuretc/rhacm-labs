@@ -17,7 +17,7 @@ spec:
     - name: 4455-tcp
       protocol: TCP
       port: 4455
-      targetPort: 4444
+      targetPort: 4455
     - name: 4567-tcp
       protocol: TCP
       port: 4567
