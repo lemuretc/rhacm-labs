@@ -23,10 +23,10 @@ spec:
               value: etherpad
             - name: CLUSTER_NAME
               value: galera
-            - name: WSREP_CLUSTER_ADDRESS_tmp
+            - name: WSREP_CLUSTER_ADDRESS
               value: >-
                 cluster1.galera.etherpad.svc.clusterset.local,cluster2.galera.etherpad.svc.clusterset.local
-            - name: WSREP_CLUSTER_ADDRESS
+            - name: WSREP_CLUSTER_ADDRESS_old
               value: galera
           resources: {}
           terminationMessagePath: /dev/termination-log
