@@ -34,7 +34,6 @@ spec:
               name: ether
         image: registry.redhat.io/rhscl/postgresql-10-rhel7@sha256:5c4f5f52a37718a9a1997ba212ef172694475558c35232b56dac638529c5b569
         imagePullPolicy: IfNotPresent
-        command: ['sh', '-c', 'postgres -D /var/lib/pgsql/data/userdata/']
         livenessProbe:
           exec:
             command:
@@ -43,6 +42,10 @@ spec:
           initialDelaySeconds: 120
           timeoutSeconds: 10
         name: postgresql
+        command:
+          - sh
+          - '-c'
+          - postgres -D /var/lib/pgsql/data/userdata/
         ports:
         - containerPort: 5432
           protocol: TCP
