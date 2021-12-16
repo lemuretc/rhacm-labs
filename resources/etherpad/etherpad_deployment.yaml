@@ -22,11 +22,11 @@ spec:
       containers:
       - env:
         - name: DB_TYPE
-          value: mysql
+          value: postgres
         - name: DB_HOST
-          value: galera
+          value: pgpool
         - name: DB_PORT
-          value: "3306"
+          value: "5432"
         - name: DB_DATABASE
           value: etherpad
         - name: DB_USER
