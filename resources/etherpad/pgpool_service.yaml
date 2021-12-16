@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: pgpool
+  labels:
+    app: pgpool
+    app.kubernetes.io/component: pgpool
+    app.kubernetes.io/instance: pgpool
+    app.kubernetes.io/name: pgpool
+    app.openshift.io/runtime-version: latest
+spec:
+  ports:
+    - name: 5432-tcp
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: pgpool

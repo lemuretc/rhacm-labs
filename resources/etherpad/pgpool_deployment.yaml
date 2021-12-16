@@ -1,0 +1,64 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: pgpool
+  labels:
+    app: pgpool
+    app.kubernetes.io/component: pgpool
+    app.kubernetes.io/instance: pgpool
+    app.kubernetes.io/name: pgpool
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgpool
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pgpool
+        deploymentconfig: pgpool
+    spec:
+      containers:
+        - name: pgpool
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/etherpad/pgpool:latest
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          env:
+            - name: PGPOOL_BACKEND_NODES
+              value: >-
+                0:cluster1.postgresql.etherpad.svc.clusterset.local:5432,1:cluster2.postgresql.etherpad.svc.clusterset.local:5432
+            - name: PGPOOL_SR_CHECK_USER
+              value: replication
+            - name: PGPOOL_SR_CHECK_PASSWORD
+              value: password
+            - name: PGPOOL_ENABLE_LDAP
+              value: 'no'
+            - name: PGPOOL_POSTGRES_USERNAME
+              value: ether
+            - name: PGPOOL_POSTGRES_PASSWORD
+              value: ether
+            - name: PGPOOL_ADMIN_USERNAME
+              value: ether
+            - name: PGPOOL_ADMIN_PASSWORD
+              value: ether
+            - name: PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING
+              value: 'yes'
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

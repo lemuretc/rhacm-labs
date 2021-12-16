@@ -1,0 +1,22 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: pgpool
+  labels:
+    app: pgpool
+    app.kubernetes.io/component: pgpool
+    app.kubernetes.io/instance: pgpool
+    app.kubernetes.io/name: pgpool
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: latest
+      annotations:
+        openshift.io/imported-from: docker.io/bitnami/pgpool
+      from:
+        kind: DockerImage
+        name: docker.io/bitnami/pgpool
+      importPolicy: {}
+      referencePolicy:
+        type: Local
