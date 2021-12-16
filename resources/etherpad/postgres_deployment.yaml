@@ -45,7 +45,7 @@ spec:
         command:
           - sh
           - '-c'
-          - chmod -R 700 /var/lib/pgsql/data/userdata/ && postgres -D /var/lib/pgsql/data/userdata/
+          - 'chmod -R 700 /var/lib/pgsql/data/userdata/ && postgres -D /var/lib/pgsql/data/userdata/'
         ports:
         - containerPort: 5432
           protocol: TCP
