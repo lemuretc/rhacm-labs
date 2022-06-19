@@ -29,7 +29,7 @@ spec:
           env:
             - name: PGPOOL_BACKEND_NODES
               value: >-
-                0:cluster1.postgresql.etherpad.svc.clusterset.local:5432,1:cluster2.postgresql.etherpad.svc.clusterset.local:5432
+                0:cluster1.postgresql.etherpad.svc.clusterset.local:5432,1:cluster3.postgresql.etherpad.svc.clusterset.local:5432
             - name: PGPOOL_SR_CHECK_USER
               value: replication
             - name: PGPOOL_SR_CHECK_PASSWORD
